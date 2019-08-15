@@ -1,4 +1,5 @@
-
+require 'pry'
+require 'rb-readline'
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
@@ -78,8 +79,8 @@ class LinkedList
 
 
     # method that returns the length of the singly linked list
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity:  O(n)
+    # Space Complexity: O(1)
     def length
       return 0 unless @head
 
@@ -97,24 +98,63 @@ class LinkedList
     # method that returns the value at a given index in the linked list
     # index count starts at 0
     # returns nil if there are fewer nodes in the linked list than the index value
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity:  O(n)
+    # Space Complexity: O(1)
     def get_at_index(index)
-      raise NotImplementedError
+      return nil if index >= self.length
+
+      desired_node = @head
+      index.times do 
+        desired_node = desired_node.next
+      end 
+      return desired_node.data
+
     end
 
     # method to print all the values in the linked list
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity: O(n) 
+    # Space Complexity: O(n)
     def visit
-      raise NotImplementedError
+      values = []
+
+      if @head 
+        current = @head
+        while current
+          values.push(current.data)
+          current = current.next
+        end 
+      end 
+
+      return values 
     end
 
     # method to delete the first node found with specified value
     # Time Complexity:  
     # Space Complexity
     def delete(value)
-      raise NotImplementedError
+      return unless @head
+    
+      if @head.data == value
+        # binding.pry 
+        @head = @head.next
+        # binding.pry 
+        return 
+      end 
+
+      prev = @head
+      current = @head.next
+
+      # if head equals, make head the next node
+      # if somewhere in the middle, make prev equal next
+      # if end of node, make next of prev node 
+      while current 
+        if current.data == value
+          prev.next = current.next
+          return 
+        end 
+        prev = current
+        current = current.next
+      end 
     end
 
     # method to reverse the singly linked list
@@ -166,24 +206,36 @@ class LinkedList
     # Space Complexity: O(1)
     def add_last(value)
       last_node = Node.new(value)
-      if @head 
-        current = @head.next
-        until current.next == nil
-          current = current.next
-        end 
-        current.next = last_node
-      else 
-      last_node = @head
-      end
-      return last_node 
+      
+      unless @head
+        @head = last_node
+        return 
+      end 
+      
+      next_node = @head.next
+
+      while next_node
+        next_node = next_node.next_node
+      end 
+
+      next_node = last_node 
+      binding.pry 
     end
 
     # method that returns the value of the last node in the linked list
     # returns nil if the linked list is empty
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity:  O(n)
+    # Space Complexity: O(1)
     def get_last
-      raise NotImplementedError
+      return nil unless @head 
+      last_node = @head
+
+      while last_node.next
+        last_node = last_node.next
+      end 
+
+      # binding.pry
+      return last_node.data 
     end
 
     # method to insert a new node with specific data value, assuming the linked

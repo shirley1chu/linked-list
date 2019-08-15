@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/skip_dsl'
+require 'pry'
 
 require_relative 'test_helper'
 
@@ -161,10 +162,14 @@ describe LinkedList do
             @list.add_first(4)
             @list.add_first(3)
             @list.add_first(2)
+
+            # 2, 3, 4, 9, 10
             
             # Act
             # delete fist node (requires updating head)
             @list.delete(2)
+
+            
             
             # Assert
             expect(@list.get_first).must_equal 3
