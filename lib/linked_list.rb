@@ -37,7 +37,7 @@ class LinkedList
       current = @head.next
       return true if @head.data == value
       
-      until current == nil 
+      while current 
         return true if current.data == value 
         current = current.next
       end
@@ -46,14 +46,14 @@ class LinkedList
 
     # method to return the max value in the linked list
     # returns the data value and not the node
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity:  O(n)
+    # Space Complexity: O(1)
     def find_max
-      return nil if @head == nil 
+      return nil unless @head
       current = @head.next
       max_value = @head.data
       
-      until current == nil 
+      while current 
         max_value = current.data if current.data > max_value
         current = current.next
       end
@@ -62,14 +62,14 @@ class LinkedList
 
     # method to return the min value in the linked list
     # returns the data value and not the node
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity:  O(n)
+    # Space Complexity: O(1)
     def find_min
-      return nil if @head == nil 
+      return nil unless @head 
       current = @head.next
       min_value = @head.data
       
-      until current == nil 
+      while current
         min_value = current.data if current.data < min_value
         current = current.next
       end
@@ -81,7 +81,17 @@ class LinkedList
     # Time Complexity:  
     # Space Complexity
     def length
-      raise NotImplementedError
+      return 0 unless @head
+
+      count = 1
+      current = @head.next 
+
+      while current
+        count += 1
+        current = current.next
+      end 
+
+      return count 
     end
 
     # method that returns the value at a given index in the linked list
@@ -145,8 +155,8 @@ class LinkedList
     # Additional Exercises 
     # returns the value in the first node
     # returns nil if the list is empty
-    # Time Complexity:  
-    # Space Complexity
+    # Time Complexity:  O(1)
+    # Space Complexity: O(1)
     def get_first
       return @head ? @head.data : nil
     end
