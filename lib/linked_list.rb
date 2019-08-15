@@ -21,7 +21,12 @@ class LinkedList
     # Time Complexity:  
     # Space Complexity
     def add_first(value)
-      raise NotImplementedError
+      # raise NotImplementedError
+      # set value.next as head
+      # set head as value
+      first_node = Node.new(value)
+      first_node.next = @head
+      @head = first_node 
     end
 
     # method to find if the linked list contains a node with specified value
@@ -120,7 +125,7 @@ class LinkedList
     # Time Complexity:  
     # Space Complexity
     def get_first
-      raise NotImplementedError
+      return @head ? @head.data : nil
     end
 
     # method that inserts a given value as a new last node in the linked list
